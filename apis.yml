@@ -1,16 +1,29 @@
+aid: certificate-enrolment-protocols
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/certificate-enrolment-protocols/refs/heads/main/apis.yml
 name: Certificate Enrolment Protocols
-description: Protocols and standards for automating the process of requesting, issuing,
-  and renewing digital certificates from Certificate Authorities, including ACME,
-  SCEP, EST, and CMP. It is widely adopted across industries to safeguard digital
-  assets and reduce security risks.
-url: https://en.wikipedia.org/wiki/Certificate_enrollment
 tags:
-- Security
-- PKI
-- Certificates
-- Cryptography
-- Automation
-created: '2025'
-modified: '2025'
+  - Security
+  - PKI
+  - Certificates
+  - Cryptography
+  - Automation
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+access: 3rd-Party
+created: '2025-01-01'
+modified: '2026-03-16'
+position: Consumer
+description: >-
+  Certificate Enrolment Protocols cover standards for automating the process
+  of requesting, issuing, and renewing digital certificates from Certificate
+  Authorities, including ACME, SCEP, EST, and CMP. Widely adopted across
+  industries to safeguard digital assets and reduce security risks.
 apis: []
-common: []
+common:
+  - type: Website
+    url: https://en.wikipedia.org/wiki/Certificate_enrollment
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
+specificationVersion: '0.19'
