@@ -3,11 +3,11 @@ url: >-
   https://raw.githubusercontent.com/api-evangelist/certificate-enrolment-protocols/refs/heads/main/apis.yml
 name: Certificate Enrolment Protocols
 tags:
-  - Security
-  - PKI
+  - Automation
   - Certificates
   - Cryptography
-  - Automation
+  - PKI
+  - Security
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
