@@ -54,6 +54,8 @@ apis:
         type: SourceCode
       - url: https://cert-manager.io/docs/configuration/acme/
         type: Integration
+      - url: openapi/certificate-enrolment-protocols-openapi.yml
+        type: OpenAPI
     description: >-
       ACME is an IETF standard defined in RFC 8555 that automates the
       interactions between CAs and web servers for validating domain
