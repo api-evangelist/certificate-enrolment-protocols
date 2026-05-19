@@ -1,0 +1,119 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: ACME (RFC 8555) Protocol API — Account
+  description: 'ACME (RFC 8555) Protocol API — Account. 2 operations. Lead operation: Roll over the account key. Self-contained
+    Naftiko capability covering one Certificate Enrolment Protocols business surface.'
+  tags:
+  - Certificate Enrolment Protocols
+  - Account
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CERTIFICATE_ENROLMENT_PROTOCOLS_API_KEY: CERTIFICATE_ENROLMENT_PROTOCOLS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: certificate-enrolment-protocols-account
+    baseUri: https://acme-v02.api.letsencrypt.org
+    description: ACME (RFC 8555) Protocol API — Account business capability. Self-contained, no shared references.
+    resources:
+    - name: acme-key-change
+      path: /acme/key-change
+      operations:
+      - name: keychange
+        method: POST
+        description: Roll over the account key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: acme-new-account
+      path: /acme/new-account
+      operations:
+      - name: newaccount
+        method: POST
+        description: Create or look up an account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: rest
+    namespace: certificate-enrolment-protocols-account-rest
+    port: 8080
+    description: REST adapter for ACME (RFC 8555) Protocol API — Account. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/acme/key-change
+      name: acme-key-change
+      description: REST surface for acme-key-change.
+      operations:
+      - method: POST
+        name: keychange
+        description: Roll over the account key
+        call: certificate-enrolment-protocols-account.keychange
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/acme/new-account
+      name: acme-new-account
+      description: REST surface for acme-new-account.
+      operations:
+      - method: POST
+        name: newaccount
+        description: Create or look up an account
+        call: certificate-enrolment-protocols-account.newaccount
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: certificate-enrolment-protocols-account-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for ACME (RFC 8555) Protocol API — Account. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: roll-over-account-key
+      description: Roll over the account key
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: certificate-enrolment-protocols-account.keychange
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-look-up-account
+      description: Create or look up an account
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: certificate-enrolment-protocols-account.newaccount
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

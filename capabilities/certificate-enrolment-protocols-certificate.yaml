@@ -1,0 +1,125 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: ACME (RFC 8555) Protocol API — Certificate
+  description: 'ACME (RFC 8555) Protocol API — Certificate. 2 operations. Lead operation: Download an issued certificate.
+    Self-contained Naftiko capability covering one Certificate Enrolment Protocols business surface.'
+  tags:
+  - Certificate Enrolment Protocols
+  - Certificate
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CERTIFICATE_ENROLMENT_PROTOCOLS_API_KEY: CERTIFICATE_ENROLMENT_PROTOCOLS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: certificate-enrolment-protocols-certificate
+    baseUri: https://acme-v02.api.letsencrypt.org
+    description: ACME (RFC 8555) Protocol API — Certificate business capability. Self-contained, no shared references.
+    resources:
+    - name: acme-cert-id
+      path: /acme/cert/{id}
+      operations:
+      - name: downloadcertificate
+        method: POST
+        description: Download an issued certificate
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: acme-revoke-cert
+      path: /acme/revoke-cert
+      operations:
+      - name: revokecertificate
+        method: POST
+        description: Revoke a certificate
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: rest
+    namespace: certificate-enrolment-protocols-certificate-rest
+    port: 8080
+    description: REST adapter for ACME (RFC 8555) Protocol API — Certificate. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/acme/cert/{id}
+      name: acme-cert-id
+      description: REST surface for acme-cert-id.
+      operations:
+      - method: POST
+        name: downloadcertificate
+        description: Download an issued certificate
+        call: certificate-enrolment-protocols-certificate.downloadcertificate
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/acme/revoke-cert
+      name: acme-revoke-cert
+      description: REST surface for acme-revoke-cert.
+      operations:
+      - method: POST
+        name: revokecertificate
+        description: Revoke a certificate
+        call: certificate-enrolment-protocols-certificate.revokecertificate
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: certificate-enrolment-protocols-certificate-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for ACME (RFC 8555) Protocol API — Certificate. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: download-issued-certificate
+      description: Download an issued certificate
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: certificate-enrolment-protocols-certificate.downloadcertificate
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: revoke-certificate
+      description: Revoke a certificate
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: certificate-enrolment-protocols-certificate.revokecertificate
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

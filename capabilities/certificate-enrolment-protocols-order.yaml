@@ -1,0 +1,173 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: ACME (RFC 8555) Protocol API — Order
+  description: 'ACME (RFC 8555) Protocol API — Order. 3 operations. Lead operation: Submit a certificate order. Self-contained
+    Naftiko capability covering one Certificate Enrolment Protocols business surface.'
+  tags:
+  - Certificate Enrolment Protocols
+  - Order
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CERTIFICATE_ENROLMENT_PROTOCOLS_API_KEY: CERTIFICATE_ENROLMENT_PROTOCOLS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: certificate-enrolment-protocols-order
+    baseUri: https://acme-v02.api.letsencrypt.org
+    description: ACME (RFC 8555) Protocol API — Order business capability. Self-contained, no shared references.
+    resources:
+    - name: acme-new-order
+      path: /acme/new-order
+      operations:
+      - name: neworder
+        method: POST
+        description: Submit a certificate order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: acme-order-id
+      path: /acme/order/{id}
+      operations:
+      - name: getorder
+        method: POST
+        description: Retrieve an order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: acme-order-id-finalize
+      path: /acme/order/{id}/finalize
+      operations:
+      - name: finalizeorder
+        method: POST
+        description: Finalize an order
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: rest
+    namespace: certificate-enrolment-protocols-order-rest
+    port: 8080
+    description: REST adapter for ACME (RFC 8555) Protocol API — Order. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/acme/new-order
+      name: acme-new-order
+      description: REST surface for acme-new-order.
+      operations:
+      - method: POST
+        name: neworder
+        description: Submit a certificate order
+        call: certificate-enrolment-protocols-order.neworder
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/acme/order/{id}
+      name: acme-order-id
+      description: REST surface for acme-order-id.
+      operations:
+      - method: POST
+        name: getorder
+        description: Retrieve an order
+        call: certificate-enrolment-protocols-order.getorder
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/acme/order/{id}/finalize
+      name: acme-order-id-finalize
+      description: REST surface for acme-order-id-finalize.
+      operations:
+      - method: POST
+        name: finalizeorder
+        description: Finalize an order
+        call: certificate-enrolment-protocols-order.finalizeorder
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: certificate-enrolment-protocols-order-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for ACME (RFC 8555) Protocol API — Order. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: submit-certificate-order
+      description: Submit a certificate order
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: certificate-enrolment-protocols-order.neworder
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-order
+      description: Retrieve an order
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: certificate-enrolment-protocols-order.getorder
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: finalize-order
+      description: Finalize an order
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: certificate-enrolment-protocols-order.finalizeorder
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

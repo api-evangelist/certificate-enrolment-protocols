@@ -1,0 +1,99 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: ACME (RFC 8555) Protocol API — Directory
+  description: 'ACME (RFC 8555) Protocol API — Directory. 2 operations. Lead operation: Retrieve a new nonce. Self-contained
+    Naftiko capability covering one Certificate Enrolment Protocols business surface.'
+  tags:
+  - Certificate Enrolment Protocols
+  - Directory
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CERTIFICATE_ENROLMENT_PROTOCOLS_API_KEY: CERTIFICATE_ENROLMENT_PROTOCOLS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: certificate-enrolment-protocols-directory
+    baseUri: https://acme-v02.api.letsencrypt.org
+    description: ACME (RFC 8555) Protocol API — Directory business capability. Self-contained, no shared references.
+    resources:
+    - name: acme-new-nonce
+      path: /acme/new-nonce
+      operations:
+      - name: newnonce
+        method: HEAD
+        description: Retrieve a new nonce
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: directory
+      path: /directory
+      operations:
+      - name: getdirectory
+        method: GET
+        description: Retrieve ACME directory
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: certificate-enrolment-protocols-directory-rest
+    port: 8080
+    description: REST adapter for ACME (RFC 8555) Protocol API — Directory. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/acme/new-nonce
+      name: acme-new-nonce
+      description: REST surface for acme-new-nonce.
+      operations:
+      - method: HEAD
+        name: newnonce
+        description: Retrieve a new nonce
+        call: certificate-enrolment-protocols-directory.newnonce
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/directory
+      name: directory
+      description: REST surface for directory.
+      operations:
+      - method: GET
+        name: getdirectory
+        description: Retrieve ACME directory
+        call: certificate-enrolment-protocols-directory.getdirectory
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: certificate-enrolment-protocols-directory-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for ACME (RFC 8555) Protocol API — Directory. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: retrieve-new-nonce
+      description: Retrieve a new nonce
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: certificate-enrolment-protocols-directory.newnonce
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-acme-directory
+      description: Retrieve ACME directory
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: certificate-enrolment-protocols-directory.getdirectory
+      outputParameters:
+      - type: object
+        mapping: $.

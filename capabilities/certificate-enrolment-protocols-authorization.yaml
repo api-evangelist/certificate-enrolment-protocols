@@ -1,0 +1,131 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: ACME (RFC 8555) Protocol API — Authorization
+  description: 'ACME (RFC 8555) Protocol API — Authorization. 2 operations. Lead operation: Retrieve an authorization. Self-contained
+    Naftiko capability covering one Certificate Enrolment Protocols business surface.'
+  tags:
+  - Certificate Enrolment Protocols
+  - Authorization
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CERTIFICATE_ENROLMENT_PROTOCOLS_API_KEY: CERTIFICATE_ENROLMENT_PROTOCOLS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: certificate-enrolment-protocols-authorization
+    baseUri: https://acme-v02.api.letsencrypt.org
+    description: ACME (RFC 8555) Protocol API — Authorization business capability. Self-contained, no shared references.
+    resources:
+    - name: acme-authz-id
+      path: /acme/authz/{id}
+      operations:
+      - name: getauthorization
+        method: POST
+        description: Retrieve an authorization
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: acme-chall-id
+      path: /acme/chall/{id}
+      operations:
+      - name: respondtochallenge
+        method: POST
+        description: Respond to a challenge
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: rest
+    namespace: certificate-enrolment-protocols-authorization-rest
+    port: 8080
+    description: REST adapter for ACME (RFC 8555) Protocol API — Authorization. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/acme/authz/{id}
+      name: acme-authz-id
+      description: REST surface for acme-authz-id.
+      operations:
+      - method: POST
+        name: getauthorization
+        description: Retrieve an authorization
+        call: certificate-enrolment-protocols-authorization.getauthorization
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/acme/chall/{id}
+      name: acme-chall-id
+      description: REST surface for acme-chall-id.
+      operations:
+      - method: POST
+        name: respondtochallenge
+        description: Respond to a challenge
+        call: certificate-enrolment-protocols-authorization.respondtochallenge
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: certificate-enrolment-protocols-authorization-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for ACME (RFC 8555) Protocol API — Authorization. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: retrieve-authorization
+      description: Retrieve an authorization
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: certificate-enrolment-protocols-authorization.getauthorization
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: respond-challenge
+      description: Respond to a challenge
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: certificate-enrolment-protocols-authorization.respondtochallenge
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
