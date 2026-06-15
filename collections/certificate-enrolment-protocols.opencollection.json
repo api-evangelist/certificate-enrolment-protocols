@@ -1,0 +1,242 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ACME (RFC 8555) Protocol API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Directory",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve ACME directory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://acme-v02.api.letsencrypt.org/directory"
+          },
+          "docs": "Returns URLs for the supported resources of this ACME server."
+        },
+        {
+          "info": {
+            "name": "Retrieve a new nonce",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "https://acme-v02.api.letsencrypt.org/acme/new-nonce"
+          },
+          "docs": "Retrieve a fresh anti-replay nonce in the Replay-Nonce header."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Account",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create or look up an account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://acme-v02.api.letsencrypt.org/acme/new-account",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new ACME account or retrieve an existing one. Body is a JWS object."
+        },
+        {
+          "info": {
+            "name": "Roll over the account key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://acme-v02.api.letsencrypt.org/acme/key-change",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Perform an account key rollover."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Order",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit a certificate order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://acme-v02.api.letsencrypt.org/acme/new-order",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a certificate issuance order with identifiers (e.g. DNS names)."
+        },
+        {
+          "info": {
+            "name": "Retrieve an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://acme-v02.api.letsencrypt.org/acme/order/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Fetch order status and details (POST-as-GET signed request)."
+        },
+        {
+          "info": {
+            "name": "Finalize an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://acme-v02.api.letsencrypt.org/acme/order/:id/finalize",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Finalize a ready order by submitting a CSR."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Authorization",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve an authorization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://acme-v02.api.letsencrypt.org/acme/authz/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve an authorization, including its challenges (POST-as-GET)."
+        },
+        {
+          "info": {
+            "name": "Respond to a challenge",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://acme-v02.api.letsencrypt.org/acme/chall/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a challenge response indicating the client is ready for validation."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Certificate",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Download an issued certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://acme-v02.api.letsencrypt.org/acme/cert/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Download an issued certificate chain (PEM, POST-as-GET)."
+        },
+        {
+          "info": {
+            "name": "Revoke a certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://acme-v02.api.letsencrypt.org/acme/revoke-cert",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Revoke a previously issued certificate."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

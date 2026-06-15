@@ -1,0 +1,1165 @@
+{
+  "item": [
+    {
+      "id": "7bb4b660-bba4-4305-8c3b-30e2bf94616e",
+      "name": "Directory",
+      "description": {
+        "content": "Server discovery and nonce retrieval.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1bac9ecb-3c6d-445e-b5fb-b234321abecf",
+          "name": "Retrieve ACME directory",
+          "request": {
+            "name": "Retrieve ACME directory",
+            "description": {
+              "content": "Returns URLs for the supported resources of this ACME server.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "directory"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8169aaba-e518-4ff8-ad79-bcc3931dbecc",
+              "name": "Directory of ACME endpoints",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "directory"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": true,\n  \"key_1\": 6077.707046041384\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "190443c8-d158-409a-9296-620687b2cb92",
+          "name": "Retrieve a new nonce",
+          "request": {
+            "name": "Retrieve a new nonce",
+            "description": {
+              "content": "Retrieve a fresh anti-replay nonce in the Replay-Nonce header.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "acme",
+                "new-nonce"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "HEAD",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f1e45ada-e85f-4ef2-bce2-72eb6bb54175",
+              "name": "Nonce returned in Replay-Nonce header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "acme",
+                    "new-nonce"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Replay-Nonce",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "85d4d666-0877-405a-8b62-25e4b420c97d",
+      "name": "Account",
+      "description": {
+        "content": "Account creation and key management.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bc67cf3d-6d82-47be-b083-ce5c905bc705",
+          "name": "Create or look up an account",
+          "request": {
+            "name": "Create or look up an account",
+            "description": {
+              "content": "Create a new ACME account or retrieve an existing one. Body is a JWS object.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "acme",
+                "new-account"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/jose+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"protected\": \"<string>\",\n  \"payload\": \"<string>\",\n  \"signature\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0b1649f9-3567-4781-a174-5bb861e8d18e",
+              "name": "Existing account",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "acme",
+                    "new-account"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"protected\": \"<string>\",\n  \"payload\": \"<string>\",\n  \"signature\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": true,\n  \"key_1\": 6077.707046041384\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f18bcfba-2fcb-4afb-89df-101b669b6417",
+              "name": "Account created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "acme",
+                    "new-account"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"protected\": \"<string>\",\n  \"payload\": \"<string>\",\n  \"signature\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": true,\n  \"key_1\": 6077.707046041384\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f08bfcd6-5095-4697-b78b-04232ac5ba26",
+          "name": "Roll over the account key",
+          "request": {
+            "name": "Roll over the account key",
+            "description": {
+              "content": "Perform an account key rollover.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "acme",
+                "key-change"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/jose+json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"protected\": \"<string>\",\n  \"payload\": \"<string>\",\n  \"signature\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "60df8c23-684d-4db0-9024-4962ca5f095f",
+              "name": "Key rolled over",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "acme",
+                    "key-change"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"protected\": \"<string>\",\n  \"payload\": \"<string>\",\n  \"signature\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "0b7610e4-b8fe-4670-b3c6-44dd3ead5d2b",
+      "name": "Order",
+      "description": {
+        "content": "Certificate order workflow.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "078859ba-554b-4a36-9b69-1a4fbad277f2",
+          "name": "Submit a certificate order",
+          "request": {
+            "name": "Submit a certificate order",
+            "description": {
+              "content": "Submit a certificate issuance order with identifiers (e.g. DNS names).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "acme",
+                "new-order"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/jose+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"protected\": \"<string>\",\n  \"payload\": \"<string>\",\n  \"signature\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "16904491-dcec-4704-aef8-c01afcb84b23",
+              "name": "Order created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "acme",
+                    "new-order"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"protected\": \"<string>\",\n  \"payload\": \"<string>\",\n  \"signature\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": true,\n  \"key_1\": 6077.707046041384\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cefd4532-3a3b-4049-aa8a-40f002632727",
+          "name": "Retrieve an order",
+          "request": {
+            "name": "Retrieve an order",
+            "description": {
+              "content": "Fetch order status and details (POST-as-GET signed request).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "acme",
+                "order",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/jose+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"protected\": \"<string>\",\n  \"payload\": \"<string>\",\n  \"signature\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9154af59-ff1a-4eeb-a5e6-1a1fd0f9a20a",
+              "name": "Order details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "acme",
+                    "order",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"protected\": \"<string>\",\n  \"payload\": \"<string>\",\n  \"signature\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": true,\n  \"key_1\": 6077.707046041384\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "db2f24e0-1644-4022-bcff-2f7d6f940e49",
+          "name": "Finalize an order",
+          "request": {
+            "name": "Finalize an order",
+            "description": {
+              "content": "Finalize a ready order by submitting a CSR.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "acme",
+                "order",
+                ":id",
+                "finalize"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/jose+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"protected\": \"<string>\",\n  \"payload\": \"<string>\",\n  \"signature\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a859d504-9ff1-488e-aa67-88109ce27911",
+              "name": "Finalized order",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "acme",
+                    "order",
+                    ":id",
+                    "finalize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"protected\": \"<string>\",\n  \"payload\": \"<string>\",\n  \"signature\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": true,\n  \"key_1\": 6077.707046041384\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "6101c2ce-a7e1-453d-b61e-d1c35dc52236",
+      "name": "Authorization",
+      "description": {
+        "content": "Domain authorization and challenges.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7a46f304-3c84-4937-a211-f6a662b56925",
+          "name": "Retrieve an authorization",
+          "request": {
+            "name": "Retrieve an authorization",
+            "description": {
+              "content": "Retrieve an authorization, including its challenges (POST-as-GET).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "acme",
+                "authz",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/jose+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"protected\": \"<string>\",\n  \"payload\": \"<string>\",\n  \"signature\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "50b61e0b-691a-4c52-9a4c-057005a91719",
+              "name": "Authorization details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "acme",
+                    "authz",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"protected\": \"<string>\",\n  \"payload\": \"<string>\",\n  \"signature\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": true,\n  \"key_1\": 6077.707046041384\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "66ac0160-1ba9-45a0-bdd7-59db4ef0d1db",
+          "name": "Respond to a challenge",
+          "request": {
+            "name": "Respond to a challenge",
+            "description": {
+              "content": "Submit a challenge response indicating the client is ready for validation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "acme",
+                "chall",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/jose+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"protected\": \"<string>\",\n  \"payload\": \"<string>\",\n  \"signature\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7d174984-27bb-459e-9cf2-81cb7d02fd25",
+              "name": "Challenge updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "acme",
+                    "chall",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"protected\": \"<string>\",\n  \"payload\": \"<string>\",\n  \"signature\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": true,\n  \"key_1\": 6077.707046041384\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "564430b0-aebb-4877-bf97-49a059bd637c",
+      "name": "Certificate",
+      "description": {
+        "content": "Issued certificate retrieval and revocation.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "855967c4-8683-4d69-9dcf-f7fef47a3aaf",
+          "name": "Download an issued certificate",
+          "request": {
+            "name": "Download an issued certificate",
+            "description": {
+              "content": "Download an issued certificate chain (PEM, POST-as-GET).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "acme",
+                "cert",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/jose+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/pem-certificate-chain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"protected\": \"<string>\",\n  \"payload\": \"<string>\",\n  \"signature\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "37eb0cf8-c577-45bf-8a73-e7792867d3d3",
+              "name": "Certificate chain",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "acme",
+                    "cert",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/pem-certificate-chain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"protected\": \"<string>\",\n  \"payload\": \"<string>\",\n  \"signature\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/pem-certificate-chain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3ba497fe-ba6a-4919-851c-ea21a946cb71",
+          "name": "Revoke a certificate",
+          "request": {
+            "name": "Revoke a certificate",
+            "description": {
+              "content": "Revoke a previously issued certificate.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "acme",
+                "revoke-cert"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/jose+json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"protected\": \"<string>\",\n  \"payload\": \"<string>\",\n  \"signature\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7d007226-5ce5-4ae6-a433-ed17c57966f7",
+              "name": "Certificate revoked",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "acme",
+                    "revoke-cert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"protected\": \"<string>\",\n  \"payload\": \"<string>\",\n  \"signature\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://acme-v02.api.letsencrypt.org",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6827033a-01bc-4236-ab92-46ddf77d71d9",
+    "name": "ACME (RFC 8555) Protocol API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Automatic Certificate Management Environment (ACME) protocol, defined in IETF RFC 8555, automates the interactions between Certificate Authorities and clients for issuing, renewing, and revoking X.509 certificates. ACME requests are JSON Web Signature (JWS) payloads carried over HTTPS. Server URLs are advertised by each ACME directory; this spec uses generic /acme/* paths.\n\nContact Support:\n Name: IETF Datatracker",
+      "type": "text/plain"
+    }
+  }
+}
