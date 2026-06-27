@@ -48,7 +48,7 @@ apis:
       - url: https://github.com/letsencrypt/boulder
         type: SourceCode
       - url: https://cert-manager.io/docs/configuration/acme/
-        type: Integration
+        type: Integrations
       - url: openapi/certificate-enrolment-protocols-openapi.yml
         type: OpenAPI
     description: >-
@@ -87,7 +87,7 @@ apis:
       - url: https://datatracker.ietf.org/doc/html/rfc7030
         type: Specification
       - url: https://datatracker.ietf.org/doc/html/rfc8951
-        type: Updates
+        type: ReleaseNotes
       - url: https://github.com/cisco/libest
         type: SourceCode
     description: >-
