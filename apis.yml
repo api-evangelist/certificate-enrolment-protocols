@@ -153,6 +153,10 @@ apis:
       renew Let's Encrypt and other ACME CA certificates on web and mail servers with a focus on automation and
       Apache/Nginx plugin support.
 common:
+  - type: VulnerabilityDisclosure
+    url: security/certificate-enrolment-protocols-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/certificate-enrolment-protocols-domain-security.yml
   - type: Website
     url: https://en.wikipedia.org/wiki/Certificate_enrollment
   - type: IETF
