@@ -1,6 +1,7 @@
 aid: certificate-enrolment-protocols
 url: https://raw.githubusercontent.com/api-evangelist/certificate-enrolment-protocols/refs/heads/main/apis.yml
 name: Certificate Enrolment Protocols
+kind: topic
 tags:
   - ACME
   - Automation
