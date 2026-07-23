@@ -1,0 +1,55 @@
+openapi: 3.1.0
+info:
+  title: ACME (RFC 8555) Protocol Account Directory API
+  description: The Automatic Certificate Management Environment (ACME) protocol, defined in IETF RFC 8555, automates the interactions between Certificate Authorities and clients for issuing, renewing, and revoking X.509 certificates. ACME requests are JSON Web Signature (JWS) payloads carried over HTTPS. Server URLs are advertised by each ACME directory; this spec uses generic /acme/* paths.
+  version: 1.0.0
+  contact:
+    name: IETF Datatracker
+    url: https://datatracker.ietf.org/doc/html/rfc8555
+  license:
+    name: IETF Trust
+    url: https://trustee.ietf.org/license-info
+servers:
+- url: https://acme-v02.api.letsencrypt.org
+  description: Let's Encrypt production ACME directory (reference implementation)
+- url: https://acme-staging-v02.api.letsencrypt.org
+  description: Let's Encrypt staging ACME directory
+tags:
+- name: Directory
+  description: Server discovery and nonce retrieval.
+paths:
+  /directory:
+    get:
+      operationId: getDirectory
+      summary: Retrieve ACME directory
+      description: Returns URLs for the supported resources of this ACME server.
+      tags:
+      - Directory
+      responses:
+        '200':
+          description: Directory of ACME endpoints
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+  /acme/new-nonce:
+    head:
+      operationId: newNonce
+      summary: Retrieve a new nonce
+      description: Retrieve a fresh anti-replay nonce in the Replay-Nonce header.
+      tags:
+      - Directory
+      responses:
+        '200':
+          description: Nonce returned in Replay-Nonce header
+          headers:
+            Replay-Nonce:
+              schema:
+                type: string
+components:
+  schemas:
+    GenericResponse:
+      type: object
+      additionalProperties: true
+x-generated-from: https://datatracker.ietf.org/doc/html/rfc8555
+x-generated-by: claude-crawl-2026-05-08
