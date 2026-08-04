@@ -1,0 +1,22 @@
+{
+  "provider": "certificate-enrolment-protocols",
+  "sources": [
+    "certificate-enrolment-protocols-account-api-openapi.yml",
+    "certificate-enrolment-protocols-authorization-api-openapi.yml",
+    "certificate-enrolment-protocols-certificate-api-openapi.yml",
+    "certificate-enrolment-protocols-directory-api-openapi.yml",
+    "certificate-enrolment-protocols-order-api-openapi.yml"
+  ],
+  "outputs": [
+    "certificate-enrolment-protocols-account-api-openapi.yml",
+    "certificate-enrolment-protocols-authorization-api-openapi.yml",
+    "certificate-enrolment-protocols-certificate-api-openapi.yml",
+    "certificate-enrolment-protocols-directory-api-openapi.yml",
+    "certificate-enrolment-protocols-order-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
