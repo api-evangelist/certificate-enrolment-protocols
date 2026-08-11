@@ -230,6 +230,17 @@ apis:
   - type: Integrations
     url: https://cert-manager.io/docs/configuration/acme/
 common:
+  - type: IssueTracker
+    url: https://github.com/letsencrypt/boulder/issues
+  - type: Releases
+    url: https://github.com/letsencrypt/boulder/releases
+  - type: CodeOfConduct
+    url: https://github.com/letsencrypt/boulder/blob/main/docs/CODE_OF_CONDUCT.md
+  - type: ContributionGuide
+    url: https://github.com/letsencrypt/boulder/blob/main/docs/CONTRIBUTING.md
+  - type: License
+    name: MPL-2.0
+    url: https://github.com/letsencrypt/boulder/blob/main/LICENSE
   - type: AgenticAccess
     url: agentic-access/certificate-enrolment-protocols-agentic-access.yml
   - type: VulnerabilityDisclosure
