@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ACME (RFC 8555) Protocol Account Directory API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Directory",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve ACME directory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://acme-v02.api.letsencrypt.org/directory"
+          },
+          "docs": "Returns URLs for the supported resources of this ACME server."
+        },
+        {
+          "info": {
+            "name": "Retrieve a new nonce",
+            "type": "http"
+          },
+          "http": {
+            "method": "HEAD",
+            "url": "https://acme-v02.api.letsencrypt.org/acme/new-nonce"
+          },
+          "docs": "Retrieve a fresh anti-replay nonce in the Replay-Nonce header."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

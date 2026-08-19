@@ -1,0 +1,77 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ACME (RFC 8555) Protocol Account Order API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Order",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit a certificate order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://acme-v02.api.letsencrypt.org/acme/new-order",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a certificate issuance order with identifiers (e.g. DNS names)."
+        },
+        {
+          "info": {
+            "name": "Retrieve an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://acme-v02.api.letsencrypt.org/acme/order/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Fetch order status and details (POST-as-GET signed request)."
+        },
+        {
+          "info": {
+            "name": "Finalize an order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://acme-v02.api.letsencrypt.org/acme/order/:id/finalize",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Finalize a ready order by submitting a CSR."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

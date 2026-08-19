@@ -1,0 +1,226 @@
+{
+  "item": [
+    {
+      "id": "66a10f3d-793c-4d1f-9bd6-cbb0ebe280c0",
+      "name": "Certificate",
+      "description": {
+        "content": "Issued certificate retrieval and revocation.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "00bcc703-8ede-4b14-8ffb-bfd1b1c64c8c",
+          "name": "Download an issued certificate",
+          "request": {
+            "name": "Download an issued certificate",
+            "description": {
+              "content": "Download an issued certificate chain (PEM, POST-as-GET).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "acme",
+                "cert",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/jose+json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/pem-certificate-chain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"protected\": \"<string>\",\n  \"payload\": \"<string>\",\n  \"signature\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e37e0421-1c33-4439-bbb7-fbec0822591a",
+              "name": "Certificate chain",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "acme",
+                    "cert",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/pem-certificate-chain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"protected\": \"<string>\",\n  \"payload\": \"<string>\",\n  \"signature\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/pem-certificate-chain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ddc6a335-90a7-45ab-8b7d-5f3cb1533de0",
+          "name": "Revoke a certificate",
+          "request": {
+            "name": "Revoke a certificate",
+            "description": {
+              "content": "Revoke a previously issued certificate.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "acme",
+                "revoke-cert"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/jose+json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"protected\": \"<string>\",\n  \"payload\": \"<string>\",\n  \"signature\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b9c56027-17c0-42ac-8b02-3430405ce623",
+              "name": "Certificate revoked",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "acme",
+                    "revoke-cert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"protected\": \"<string>\",\n  \"payload\": \"<string>\",\n  \"signature\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://acme-v02.api.letsencrypt.org",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a313847c-3832-4394-9137-dc27f42e0e63",
+    "name": "ACME (RFC 8555) Protocol Account Certificate API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Automatic Certificate Management Environment (ACME) protocol, defined in IETF RFC 8555, automates the interactions between Certificate Authorities and clients for issuing, renewing, and revoking X.509 certificates. ACME requests are JSON Web Signature (JWS) payloads carried over HTTPS. Server URLs are advertised by each ACME directory; this spec uses generic /acme/* paths.\n\nContact Support:\n Name: IETF Datatracker",
+      "type": "text/plain"
+    }
+  }
+}

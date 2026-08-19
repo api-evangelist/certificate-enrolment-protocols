@@ -1,0 +1,168 @@
+{
+  "item": [
+    {
+      "id": "e008fd14-1df0-416a-a38b-f1f703d8883b",
+      "name": "Directory",
+      "description": {
+        "content": "Server discovery and nonce retrieval.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5bebdc8c-c514-46f8-81bd-790bcb383d46",
+          "name": "Retrieve ACME directory",
+          "request": {
+            "name": "Retrieve ACME directory",
+            "description": {
+              "content": "Returns URLs for the supported resources of this ACME server.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "directory"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9c47a581-76da-436c-bff9-07c49b765c06",
+              "name": "Directory of ACME endpoints",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "directory"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f282c141-9515-4078-a328-eaa117f53d18",
+          "name": "Retrieve a new nonce",
+          "request": {
+            "name": "Retrieve a new nonce",
+            "description": {
+              "content": "Retrieve a fresh anti-replay nonce in the Replay-Nonce header.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "acme",
+                "new-nonce"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "HEAD",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "db31b9de-d76b-4d9c-b26a-6671e34f1a77",
+              "name": "Nonce returned in Replay-Nonce header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "acme",
+                    "new-nonce"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "HEAD",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "Replay-Nonce",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://acme-v02.api.letsencrypt.org",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "39ef61a4-a199-475e-b829-5edec749b50f",
+    "name": "ACME (RFC 8555) Protocol Account Directory API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Automatic Certificate Management Environment (ACME) protocol, defined in IETF RFC 8555, automates the interactions between Certificate Authorities and clients for issuing, renewing, and revoking X.509 certificates. ACME requests are JSON Web Signature (JWS) payloads carried over HTTPS. Server URLs are advertised by each ACME directory; this spec uses generic /acme/* paths.\n\nContact Support:\n Name: IETF Datatracker",
+      "type": "text/plain"
+    }
+  }
+}
