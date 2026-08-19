@@ -35,7 +35,7 @@ access: 3rd-Party
 created: '2025-01-01'
 modified: '2026-05-19'
 position: Consumer
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 description: >-
   Certificate Enrolment Protocols are the interoperable standards that automate the lifecycle operations of requesting,
   issuing, renewing, and revoking X.509 digital certificates between Certificate Authorities (CAs), Registration
