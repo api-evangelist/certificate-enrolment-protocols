@@ -111,6 +111,11 @@ apis:
   tags:
   - ACME
   - CNCF
+  - Clients
+  - Kubernetes
+  tags_raw:
+  - ACME
+  - CNCF
   - Client
   - Kubernetes
   humanURL: https://cert-manager.io/
