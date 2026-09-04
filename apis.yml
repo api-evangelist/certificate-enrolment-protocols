@@ -47,7 +47,7 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/certificat
 access: 3rd-Party
 created: '2025-01-01'
 modified: '2026-05-19'
-position: Consumer
+position: Consuming
 specificationVersion: '0.23'
 description: >-
   Certificate Enrolment Protocols are the interoperable standards that automate the lifecycle operations of requesting,
