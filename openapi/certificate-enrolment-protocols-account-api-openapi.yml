@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: ACME (RFC 8555) Protocol Account API
   description: The Automatic Certificate Management Environment (ACME) protocol, defined in IETF RFC 8555, automates the interactions between Certificate Authorities and clients for issuing, renewing, and revoking X.509 certificates. ACME requests are JSON Web Signature (JWS) payloads carried over HTTPS. Server URLs are advertised by each ACME directory; this spec uses generic /acme/* paths.
@@ -62,9 +62,6 @@ paths:
           description: Key rolled over
 components:
   schemas:
-    GenericResponse:
-      type: object
-      additionalProperties: true
     JwsRequest:
       type: object
       description: A JSON Web Signature (JWS) flattened serialization object.
@@ -82,6 +79,9 @@ components:
       - protected
       - payload
       - signature
+      additionalProperties: true
+    GenericResponse:
+      type: object
       additionalProperties: true
 x-generated-from: https://datatracker.ietf.org/doc/html/rfc8555
 x-generated-by: claude-crawl-2026-05-08
