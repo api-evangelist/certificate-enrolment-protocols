@@ -72,9 +72,6 @@ paths:
                 $ref: '#/components/schemas/GenericResponse'
 components:
   schemas:
-    GenericResponse:
-      type: object
-      additionalProperties: true
     JwsRequest:
       type: object
       description: A JSON Web Signature (JWS) flattened serialization object.
@@ -92,6 +89,9 @@ components:
       - protected
       - payload
       - signature
+      additionalProperties: true
+    GenericResponse:
+      type: object
       additionalProperties: true
 x-generated-from: https://datatracker.ietf.org/doc/html/rfc8555
 x-generated-by: claude-crawl-2026-05-08
