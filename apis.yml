@@ -248,6 +248,9 @@ apis:
   - type: Integrations
     url: https://cert-manager.io/docs/configuration/acme/
 common:
+  - type: CapabilityMap
+    url: capabilities/certificate-enrolment-protocols-capability-edges.yml
+    name: Certificate Enrolment Protocols Business Capability Map
   - type: IssueTracker
     url: https://github.com/letsencrypt/boulder/issues
   - type: Releases
