@@ -248,6 +248,12 @@ apis:
   - type: Integrations
     url: https://cert-manager.io/docs/configuration/acme/
 common:
+  - type: Plans
+    url: plans/certificate-enrolment-protocols-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/certificate-enrolment-protocols-rate-limits.yml
+  - type: FinOps
+    url: finops/certificate-enrolment-protocols-finops.yml
   - type: CapabilityMap
     url: capabilities/certificate-enrolment-protocols-capability-edges.yml
     name: Certificate Enrolment Protocols Business Capability Map
